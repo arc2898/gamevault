@@ -3,7 +3,11 @@ import { games } from '../data/games'
 import { useGameStore } from '../store/gameStore'
 import GameCard from './GameCard'
 
-export default function GameGrid() {
+interface Props {
+  onGameSelect: (id: string) => void
+}
+
+export default function GameGrid({ onGameSelect }: Props) {
   const { searchQuery, category } = useGameStore()
 
   const filtered = games.filter((g) => {
@@ -21,7 +25,7 @@ export default function GameGrid() {
       className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
     >
       {filtered.map((game) => (
-        <GameCard key={game.id} game={game} />
+        <GameCard key={game.id} game={game} onClick={() => onGameSelect(game.id)} />
       ))}
     </motion.div>
   )

@@ -4,9 +4,10 @@ import { useGameStore } from '../store/gameStore'
 
 interface Props {
   game: Game
+  onClick: () => void
 }
 
-export default function GameCard({ game }: Props) {
+export default function GameCard({ game, onClick }: Props) {
   const { favorites, addFavorite, removeFavorite } = useGameStore()
   const isFav = favorites.includes(game.id)
 
@@ -20,6 +21,7 @@ export default function GameCard({ game }: Props) {
     <motion.div
       whileHover={{ scale: 1.05, y: -5 }}
       whileTap={{ scale: 0.95 }}
+      onClick={onClick}
       className="relative cursor-pointer group"
     >
       <div
